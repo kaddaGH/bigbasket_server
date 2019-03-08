@@ -1,9 +1,8 @@
 data = JSON.parse(content)
+
 scrape_url_nbr_products = data['tab_info'][0]['product_info']['p_count'].to_i
 current_page = page['vars']['page']
 products = data['tab_info'][0]['product_info']['products']
-
-
 
 # if ot's first page , generate pagination
 if current_page == 1 and scrape_url_nbr_products > products.length
@@ -11,7 +10,7 @@ if current_page == 1 and scrape_url_nbr_products > products.length
   step_page = 1
   while step_page * products.length <= scrape_url_nbr_products
     step_page = 2
-
+    
 
     step_page = step_page + 1
 
