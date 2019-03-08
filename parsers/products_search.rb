@@ -41,7 +41,7 @@ products.each_with_index do |product, i|
       page_type: 'product_details',
       method: 'POST',
       url: "https://www.bigbasket.com/product/pd/v1/gql?search_term=#{page['vars']['search_term']}&page=#{current_page + 1}&rank=#{ i + 1}",
-      body:query.gsub(/product_id/,product['id']),
+      body:query.gsub(/product_id/,product['sku'].to_s),
       vars: {
           'input_type' => page['vars']['input_type'],
           'search_term' => page['vars']['search_term'],
