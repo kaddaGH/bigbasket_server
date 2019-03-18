@@ -1,4 +1,6 @@
-data = JSON.parse(content)
+html=content
+data = JSON.parse(html.gsub(/<[^<>]*>/,''))
+
 current_page = page['vars']['page']
 if current_page == 1
   scrape_url_nbr_products = data['tab_info'][0]['product_info']['p_count'].to_i
