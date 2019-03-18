@@ -137,7 +137,7 @@ pages << {
       page_type: 'product_details',
       method: 'POST',
       url: "https://www.bigbasket.com/pd/#{product['sku'].to_s}/product/?search_term=#{page['vars']['search_term']}&page=#{current_page + 1}&rank=#{ i + 1}",
-      fetch_type:"fullbrowser",
+      fetch_type:"browser",
       vars: {
 
               'product_details' => product_details
