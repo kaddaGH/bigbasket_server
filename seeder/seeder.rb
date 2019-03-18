@@ -2,7 +2,7 @@ require 'cgi'
 pages << {
     page_type: 'products_search',
     method: 'GET',
-    url: 'https://www.bigbasket.com/product/get-products/?listtype=pc&filters=[]&sorted_on=pricelth&slug=sports-energy-drinks&tab_type=[%22all%22]',
+    url: 'https://www.bigbasket.com/product/get-products/?listtype=pc&filters=[]&sorted_on=popularity&slug=sports-energy-drinks&tab_type=[%22all%22]',
     vars: {
         'input_type' => 'taxonomy',
         'search_term' => '-',
