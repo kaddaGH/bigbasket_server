@@ -3,7 +3,7 @@ require 'cgi'
 pages << {
     page_type: 'products_search',
     method: 'GET',
-    headers:headers,
+    fetch_type: "browser",
     url: 'https://www.bigbasket.com/product/get-products/?sid=xWBUI46ibmbDoWMSo21hdqUzLjIuMKJjY60zNTF8MTY5NHwxNzA5qHNrdV9saXN0kKJhb8KidXLComFww6JsdM0D6qNkc2rNHjahb6pwb3B1bGFyaXR5qXNvdXJjZV9pZAGiZHPNA4CjbXJpLA==&listtype=pc&filters=[]&sorted_on=popularity&slug=sports-energy-drinks&tab_type=[%22all%22]',
     vars: {
         'input_type' => 'taxonomy',
