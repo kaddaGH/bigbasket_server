@@ -20,6 +20,7 @@ if current_page == 1 and scrape_url_nbr_products > products.length
     pages << {
         page_type: 'products_search',
         method: 'GET',
+        fetch_type: "browser",
         url: page['url'] + "&page=#{step_page}",
         vars: {
             'input_type' => page['vars']['input_type'],
