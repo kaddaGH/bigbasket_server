@@ -1,3 +1,4 @@
+content=content.gsub(/<[^<>]*>/,'')
 data = JSON.parse(content)
 
 
