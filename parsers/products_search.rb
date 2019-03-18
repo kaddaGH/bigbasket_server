@@ -1,7 +1,4 @@
-content=content.gsub(/<[^<>]*>/,'')
 data = JSON.parse(content)
-
-
 current_page = page['vars']['page']
 if current_page == 1
   scrape_url_nbr_products = data['tab_info'][0]['product_info']['p_count'].to_i
@@ -17,7 +14,7 @@ if current_page == 1 and scrape_url_nbr_products > products.length
   nbr_products_pg1 = products.length
   step_page = 1
   while step_page * products.length <= scrape_url_nbr_products
-    step_page = 2
+    step_page = step_page + 1
     pages << {
         page_type: 'products_search',
         method: 'GET',
@@ -32,7 +29,8 @@ if current_page == 1 and scrape_url_nbr_products > products.length
         }
     }
 
-    step_page = step_page + 1
+
+
 
 
   end
