@@ -20,7 +20,6 @@ if current_page == 1 and scrape_url_nbr_products > products.length
     pages << {
         page_type: 'products_search',
         method: 'GET',
-        fetch_type: "browser",
         url: page['url'] + "&page=#{step_page}",
         vars: {
             'input_type' => page['vars']['input_type'],
@@ -135,7 +134,7 @@ products.each_with_index do |product, i|
 
   pages << {
       page_type: 'product_details',
-      method: 'POST',
+      method: 'GET',
       url: "https://www.bigbasket.com/pd/#{product['sku'].to_s}/product/?search_term=#{page['vars']['search_term']}&page=#{current_page + 1}&rank=#{ i + 1}",
       fetch_type: "browser",
       vars: {
