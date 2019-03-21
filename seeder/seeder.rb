@@ -18,7 +18,7 @@ search_terms.each do |search_term|
   pages << {
       page_type: 'products_search',
       method: 'GET',
-      url: "https://www.bigbasket.com/product/get-products/?sid=WfaAo46hYxKjbWF2pTMuMi4wom5mw6hza3VfbGlzdJCiYW_ConVywqFxrWVuZXJneSBkcmlua3OiYXDDomx0zQPqo2Rzas0eNqFvqXJlbGV2YW5jZalzb3VyY2VfaWQBomRzzQOAo21yaSw=&listtype=ps&filters=[]&sorted_on=popularity&slug=#{CGI.escape(search_term)}&tab_type=[%22all%22]",
+      url: "https://www..com/product/get-products/?sid=WfaAo46hYxKjbWF2pTMuMi4wom5mw6hza3VfbGlzdJCiYW_ConVywqFxrWVuZXJneSBkcmlua3OiYXDDomx0zQPqo2Rzas0eNqFvqXJlbGV2YW5jZalzb3VyY2VfaWQBomRzzQOAo21yaSw=&listtype=ps&filters=[]&sorted_on=popularity&slug=#{CGI.escape(search_term)}&tab_type=[%22all%22]",
       vars: {
           'input_type' => 'search',
           'search_term' => search_term,

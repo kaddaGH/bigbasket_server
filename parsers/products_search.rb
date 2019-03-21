@@ -136,7 +136,7 @@ products.each_with_index do |product, i|
       page_type: 'product_details',
       method: 'GET',
       url: "https://www.bigbasket.com/pd/#{product['sku'].to_s}/product/?search_term=#{page['vars']['search_term']}&page=#{current_page + 1}&rank=#{ i + 1}",
-      fetch_type: "browser",
+      fetch_type: "fullbrowser",
       vars: {
 
           'product_details' => product_details
