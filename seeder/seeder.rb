@@ -20,7 +20,7 @@ pages << {
     page_type: 'products_search',
     headers:headers,
     method: 'GET',
-    url: 'https://www.bigbasket.com/product/get-products/?listtype=pc&filters=[]&sorted_on=popularity&slug=sports-energy-drinks&tab_type=[%22all%22]',
+    url: 'https://www.bigbasket.com/product/get-products/?sid=jr4WTYyhYwGjbWF2pTMuMi4wqHNrdV9saXN0kKJhb8KidXLCoXGtZW5lcmd5IGRyaW5rc6JhcMOibHTNAROhb6lyZWxldmFuY2Wpc291cmNlX2lkAaJuZsOjbXJpAQ==&listtype=pc&filters=[]&sorted_on=popularity&slug=sports-energy-drinks&tab_type=[%22all%22]',
     vars: {
         'input_type' => 'taxonomy',
         'search_term' => '-',
@@ -35,7 +35,7 @@ search_terms.each do |search_term|
       page_type: 'products_search',
       method: 'GET',
       headers:headers,
-      url: "https://www.bigbasket.com/product/get-products/?listtype=ps&filters=[]&sorted_on=popularity&slug=#{CGI.escape(search_term)}&tab_type=[%22all%22]",
+      url: "https://www.bigbasket.com/product/get-products/?sid=jr4WTYyhYwGjbWF2pTMuMi4wqHNrdV9saXN0kKJhb8KidXLCoXGtZW5lcmd5IGRyaW5rc6JhcMOibHTNAROhb6lyZWxldmFuY2Wpc291cmNlX2lkAaJuZsOjbXJpAQ==&listtype=ps&filters=[]&sorted_on=popularity&slug=#{CGI.escape(search_term)}&tab_type=[%22all%22]",
       vars: {
           'input_type' => 'search',
           'search_term' => search_term,
