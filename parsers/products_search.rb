@@ -41,93 +41,6 @@ end
 
 products.each_with_index do |product, i|
 
-
-  discount = product['dis_val'].to_i rescue 0
-  promotion = ''
-  if discount > 0
-    if product['dis_t'] == 'A'
-      promotion = "SAVE Rs " + product['dis_val']
-    else
-      promotion = "Get " + product['dis_val'] + "% off"
-    end
-
-
-  end
-
-
-  price = product['sp']
-
-  brand = product['p_brand']
-
-  size_info = product['w']
-  [
-      /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
-      /(\d*[\.,]?\d+)\s?([Oo][Zz])/,
-      /(\d*[\.,]?\d+)\s?([Ff][Oo])/,
-      /(\d*[\.,]?\d+)\s?([Ee][Aa])/,
-      /(\d*[\.,]?\d+)\s?([Ff][Zz])/,
-      /(\d*[\.,]?\d+)\s?(Fluid Ounces?)/,
-      /(\d*[\.,]?\d+)\s?([Oo]unce)/,
-      /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
-      /(\d*[\.,]?\d+)\s?([Ll])/,
-      /(\d*[\.,]?\d+)\s?([Kk][Gg])/,
-      /(\d*[\.,]?\d+)\s?([Gg])/,
-      /(\d*[\.,]?\d+)\s?([Ll]itre)/,
-      /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
-      /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
-      /(\d*[\.,]?\d+)\s?([Cc]apsules)/,
-      /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
-      /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
-      /(\d*[\.,]?\d+)\s?([Cc]hews)/
-
-
-  ].find {|regexp| size_info =~ regexp}
-  uom = $2
-  item_size = $1
-
-  match = [
-      /(\d+)\s?[xX]/,
-      /Pack of (\d+)/,
-      /Box of (\d+)/,
-      /Case of (\d+)/,
-      /(\d+)\s?[Cc]ount/,
-      /(\d+)\s?[Cc][Tt]/,
-      /(\d+)[\s-]?[Pp]ack($|[^e])/,
-      /(\d+)\s?[Pp][Kk]/
-  ].find {|regexp| size_info =~ regexp}
-  in_pack = match ? $1 : '1'
-
-
-  image = "https:" + product['p_img_url'] rescue ''
-
-  product_details = {
-      # - - - - - - - - - - -
-      RETAILER_ID: '132',
-      RETAILER_NAME: 'bigbasket',
-      GEOGRAPHY_NAME: 'IN',
-      # - - - - - - - - - - -
-      SCRAPE_INPUT_TYPE: page['vars']['input_type'],
-      SCRAPE_INPUT_SEARCH_TERM: page['vars']['search_term'],
-      SCRAPE_INPUT_CATEGORY: page['vars']['input_type'] == 'taxonomy' ? 'Sports & Energy Drinks' : '-',
-      SCRAPE_URL_NBR_PRODUCTS: scrape_url_nbr_products,
-      # - - - - - - - - - - -
-      SCRAPE_URL_NBR_PROD_PG1: nbr_products_pg1,
-      # - - - - - - - - - - -
-      PRODUCT_BRAND: brand,
-      PRODUCT_RANK: i + 1,
-      PRODUCT_PAGE: page['vars']['page'],
-      PRODUCT_ID: product['sku'],
-      PRODUCT_MAIN_IMAGE_URL: image,
-      PRODUCT_ITEM_SIZE: item_size,
-      PRODUCT_ITEM_SIZE_UOM: uom,
-      PRODUCT_ITEM_QTY_IN_PACK: in_pack,
-      SALES_PRICE: price,
-      PROMOTION_TEXT: promotion,
-      EXTRACTED_ON: Time.now.to_s
-  }
-
-  product_details['_collection'] = 'products'
-
   headers = {
 
       'Host' => 'www.bigbasket.com',
@@ -148,7 +61,7 @@ products.each_with_index do |product, i|
 
   }
 
-  post = '{"query":"query ProductQuery(  $id: Int!) {  product(    id: $id  ) {    base_img_url                      ...productFields    children {      ...productFields    }  }}fragment productFields on Product {  id  desc  pack_desc  sp  mrp  w  images {    s    m    l    xl    xxl  }  variable_weight {    msg    link  }  discount {    type    value  }  brand {    name    slug    url  }  additional_attr {    food_type    info {      type      image      sub_type      label    }  }  tabs {    content    title  }  tags {    header    values {      display_name      dest_type      dest_slug      url    }  }  combo_info {    destination {      display_name      dest_type      dest_slug      url    }    total_saving_msg              items{      id      brand      sp      mrp      is_express      saving_msg      link      img_url      qty      wgt      p_desc    }    total_sp    total_mrp    annotation_msg  }  gift {    msg  }  sale {    type    display_message    end_time    maximum_redem_per_order    maximum_redem_per_member    show_counter    message    offers_msg  }  promo {    type    label    id    name    saving    savings_display    desc    url    desc_label  }  store_availability {    tab_type    pstat    availability_info_id    store_id  }  discounted_price {    display_name    value  }}\n    ","variables":{"id":"' + product['sku'].to_s + '","visitorId":"824190617","masterRi":"3630","cityId":"1"}}'
+  body = '{"query":"query ProductQuery(  $id: Int!) {  product(    id: $id  ) {    base_img_url                      ...productFields    children {      ...productFields    }  }}fragment productFields on Product {  id  desc  pack_desc  sp  mrp  w  images {    s    m    l    xl    xxl  }  variable_weight {    msg    link  }  discount {    type    value  }  brand {    name    slug    url  }  additional_attr {    food_type    info {      type      image      sub_type      label    }  }  tabs {    content    title  }  tags {    header    values {      display_name      dest_type      dest_slug      url    }  }  combo_info {    destination {      display_name      dest_type      dest_slug      url    }    total_saving_msg              items{      id      brand      sp      mrp      is_express      saving_msg      link      img_url      qty      wgt      p_desc    }    total_sp    total_mrp    annotation_msg  }  gift {    msg  }  sale {    type    display_message    end_time    maximum_redem_per_order    maximum_redem_per_member    show_counter    message    offers_msg  }  promo {    type    label    id    name    saving    savings_display    desc    url    desc_label  }  store_availability {    tab_type    pstat    availability_info_id    store_id  }  discounted_price {    display_name    value  }}\n    ","variables":{"id":"' + product['sku'].to_s + '","visitorId":"824190617","masterRi":"3630","cityId":"1"}}'
 
 
   pages << {
@@ -156,11 +69,13 @@ products.each_with_index do |product, i|
       method: 'POST',
       headers:headers,
       url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{current_page + 1}&rank=#{ i + 1}",
-      body: post,
+      body: body,
       vars: {
-
-          'product_details' => product_details
-
+          'input_type' => page['vars']['input_type'],
+          'search_term' => page['vars']['search_term'],
+          'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
+          'SCRAPE_URL_NBR_PRODUCTS_PG1' => nbr_products_pg1,
+          'page' => current_page
       }
   }
 
