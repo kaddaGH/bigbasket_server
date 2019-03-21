@@ -16,7 +16,7 @@ if current_page == 1 and scrape_url_nbr_products > products.length
   nbr_products_pg1 = products.length
   step_page = 1
   while step_page * products.length <= scrape_url_nbr_products
-    break 
+
     step_page = step_page + 1
     pages << {
         page_type: 'products_search',
@@ -40,7 +40,7 @@ else
 end
 
 
-products.take(1).each_with_index do |product, i|
+products.each_with_index do |product, i|
 
   headers = {
 
@@ -75,6 +75,7 @@ products.take(1).each_with_index do |product, i|
           'input_type' => page['vars']['input_type'],
           'search_term' => page['vars']['search_term'],
           'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
+          'rank' => i+1,
           'SCRAPE_URL_NBR_PRODUCTS_PG1' => nbr_products_pg1,
           'page' => current_page
       }
