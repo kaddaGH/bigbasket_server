@@ -4,58 +4,63 @@ if data.key?("json_data")
   data = data['json_data']
 end
 
+
 current_page = page['vars']['page']
 if current_page == 1
   scrape_url_nbr_products = data['tab_info'][0]['product_info']['p_count'].to_i
   products = data['tab_info'][0]['product_info']['products']
-  products_ids=[]
+  slug = CGI.escape(data['tab_info'][0]['q']) rescue ''
+  session_id = data['tab_info'][0]['sid']
+  products_ids = []
 else
   scrape_url_nbr_products = page['vars']['scrape_url_nbr_products']
-  products_ids= page['vars']['products_ids']
+  products_ids = page['vars']['products_ids']
   products = data['tab_info']['product_map']['all']['prods']
+  slug = page['vars']['slug']
+  session_id = page['vars']['session_id']
 end
 
-if current_page == 1 and scrape_url_nbr_products > products.length and scrape_url_nbr_products>19
+if current_page == 1 and scrape_url_nbr_products > products.length and scrape_url_nbr_products > 19
   nbr_products_pg1 = products.length
 elsif current_page == 1 and products.length <= scrape_url_nbr_products
   nbr_products_pg1 = products.length
 else
   nbr_products_pg1 = page['vars']['nbr_products_pg1']
 end
-slug= CGI.escape(data['tab_info'][0]['q']) rescue ''
+
 # if ot's first page , generate pagination
-if  scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products>19
+if scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products > 19
 
 
-        url = "https://www.bigbasket.com/product/get-products/?sid=#{data['tab_info'][0]['sid']}&listtype=ps&filters=[]&sorted_on=popularity&slug=#{slug}&tab_type=[%22all%22]"
+  url = "https://www.bigbasket.com/product/get-products/?sid=#{session_id}&listtype=ps&filters=[]&sorted_on=popularity&slug=#{slug}&tab_type=[%22all%22]"
 
-        pages << {
-        page_type: 'products_search',
-        method: 'GET',
-        url: url + "&page=#{current_page+1}",
-        vars: {
-            'input_type' => page['vars']['input_type'],
-            'search_term' => page['vars']['search_term'],
-            'page' => current_page+1,
-            'nbr_products_pg1' => nbr_products_pg1,
-            'scrape_url_nbr_products' => scrape_url_nbr_products,
-            'products_ids'=>products_ids
+  pages << {
+      page_type: 'products_search',
+      method: 'GET',
+      url: url + "&page=#{current_page + 1}",
+      vars: {
+          'input_type' => page['vars']['input_type'],
+          'search_term' => page['vars']['search_term'],
+          'page' => current_page + 1,
+          'nbr_products_pg1' => nbr_products_pg1,
+          'scrape_url_nbr_products' => scrape_url_nbr_products,
+          'products_ids' => products_ids,
+          "slug" => slug,
+          "session_id" => session_id
 
-        }
-    }
+      }
+  }
 
 
 end
 
 
+products.each_with_index do |product, i|
+  products_ids << {
 
-
-products.each_with_index do |product,i|
-  products_ids<<{
-
-      "product_id"=>product['sku'].to_s,
-      "product_page"=>current_page,
-      "product_rank"=>i+1
+      "product_id" => product['sku'].to_s,
+      "product_page" => current_page,
+      "product_rank" => i + 1
 
   }
 
@@ -84,7 +89,6 @@ headers = {
 }
 
 
-
 if current_page * 20 > scrape_url_nbr_products
 
 
@@ -96,7 +100,7 @@ if current_page * 20 > scrape_url_nbr_products
     pages << {
         page_type: 'product_details',
         method: 'POST',
-        headers:headers,
+        headers: headers,
         url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{product["product_page"]}&rank=#{ product["product_rank"]}",
         body: body,
         vars: {
@@ -110,12 +114,7 @@ if current_page * 20 > scrape_url_nbr_products
     }
 
 
-
   end
-
-
-
-
 
 
 end
