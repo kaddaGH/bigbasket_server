@@ -17,12 +17,9 @@ end
 
 slug= CGI.escape(data['tab_info'][0]['q']) rescue ''
 # if ot's first page , generate pagination
-if current_page == 1 and scrape_url_nbr_products > products.length and scrape_url_nbr_products>19
-  nbr_products_pg1 = products.length
-  step_page = 1
-  while step_page * products.length <= scrape_url_nbr_products
+if  scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products>19
 
-        step_page = step_page + 1
+
         url = "https://www.bigbasket.com/product/get-products/?sid=#{data['tab_info'][0]['sid']}&listtype=ps&filters=[]&sorted_on=popularity&slug=#{slug}&tab_type=[%22all%22]"
 
         pages << {
@@ -32,7 +29,7 @@ if current_page == 1 and scrape_url_nbr_products > products.length and scrape_ur
         vars: {
             'input_type' => page['vars']['input_type'],
             'search_term' => page['vars']['search_term'],
-            'page' => step_page,
+            'page' => current_page+1,
             'nbr_products_pg1' => nbr_products_pg1,
             'scrape_url_nbr_products' => scrape_url_nbr_products,
             'products_ids'=>products_ids
@@ -41,7 +38,10 @@ if current_page == 1 and scrape_url_nbr_products > products.length and scrape_ur
     }
 
 
-  end
+end
+
+if current_page == 1 and scrape_url_nbr_products > products.length and scrape_url_nbr_products>19
+  nbr_products_pg1 = products.length
 elsif current_page == 1 and products.length <= scrape_url_nbr_products
   nbr_products_pg1 = products.length
 else
@@ -57,6 +57,8 @@ products.each_with_index do |product,i|
       "product_rank"=>i+1
 
   }
+
+
 end
 
 
@@ -81,6 +83,7 @@ headers = {
 }
 
 
+
 if current_page * 20 > scrape_url_nbr_products
 
 
@@ -99,16 +102,12 @@ if current_page * 20 > scrape_url_nbr_products
             'input_type' => page['vars']['input_type'],
             'search_term' => page['vars']['search_term'],
             'SCRAPE_URL_NBR_PRODUCTS' => products_ids.length,
-            'rank' => rank,
+            'rank' => product["product_rank"],
             'SCRAPE_URL_NBR_PRODUCTS_PG1' => nbr_products_pg1,
-            'page' => current_page
+            'page' => product["product_page"]
         }
     }
-    rank=rank+1
-    if rank>20
-      rank=1
-      current_page = current_page+1
-    end
+
 
 
   end
