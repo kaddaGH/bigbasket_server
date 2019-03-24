@@ -31,8 +31,8 @@ end
 # if ot's first page , generate pagination
 if scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products > 19
 
-
-  url = "https://www.bigbasket.com/product/get-products/?sid=#{session_id}&listtype=ps&filters=[]&sorted_on=popularity&slug=#{slug}&tab_type=[%22all%22]"
+  url =   "https://www.bigbasket.com/product/get-products/?slug=#{slug}&tab_type=[%22all%22]&sorted_on=relevance&listtype=ps"
+  #url = "https://www.bigbasket.com/product/get-products/?sid=#{session_id}&listtype=ps&filters=[]&sorted_on=popularity&slug=#{slug}&tab_type=[%22all%22]"
 
   pages << {
       page_type: 'products_search',
