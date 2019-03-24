@@ -15,6 +15,13 @@ else
   products = data['tab_info']['product_map']['all']['prods']
 end
 
+if current_page == 1 and scrape_url_nbr_products > products.length and scrape_url_nbr_products>19
+  nbr_products_pg1 = products.length
+elsif current_page == 1 and products.length <= scrape_url_nbr_products
+  nbr_products_pg1 = products.length
+else
+  nbr_products_pg1 = page['vars']['nbr_products_pg1']
+end
 slug= CGI.escape(data['tab_info'][0]['q']) rescue ''
 # if ot's first page , generate pagination
 if  scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products>19
@@ -25,7 +32,7 @@ if  scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products>19
         pages << {
         page_type: 'products_search',
         method: 'GET',
-        url: url + "&page=#{step_page}",
+        url: url + "&page=#{current_page+1}",
         vars: {
             'input_type' => page['vars']['input_type'],
             'search_term' => page['vars']['search_term'],
@@ -40,13 +47,7 @@ if  scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products>19
 
 end
 
-if current_page == 1 and scrape_url_nbr_products > products.length and scrape_url_nbr_products>19
-  nbr_products_pg1 = products.length
-elsif current_page == 1 and products.length <= scrape_url_nbr_products
-  nbr_products_pg1 = products.length
-else
-  nbr_products_pg1 = page['vars']['nbr_products_pg1']
-end
+
 
 
 products.each_with_index do |product,i|
