@@ -49,8 +49,14 @@ else
 end
 
 
-products.each_with_index do |product|
-  products_ids<<product['sku'].to_s
+products.each_with_index do |product,i|
+  products_ids<<{
+
+      "product_id"=>product['sku'].to_s,
+      "product_page"=>current_page,
+      "product_rank"=>i+1
+
+  }
 end
 
 
@@ -76,18 +82,18 @@ headers = {
 
 
 if current_page * 20 > scrape_url_nbr_products
-  rank = 1
-  page=1
-  products_ids.each_with_index do |product_id|
 
-    body = '{"query":"query ProductQuery(  $id: Int!) {  product(    id: $id  ) {    base_img_url                      ...productFields    children {      ...productFields    }  }}fragment productFields on Product {  id  desc  pack_desc  sp  mrp  w  images {    s    m    l    xl    xxl  }  variable_weight {    msg    link  }  discount {    type    value  }  brand {    name    slug    url  }  additional_attr {    food_type    info {      type      image      sub_type      label    }  }  tabs {    content    title  }  tags {    header    values {      display_name      dest_type      dest_slug      url    }  }  combo_info {    destination {      display_name      dest_type      dest_slug      url    }    total_saving_msg              items{      id      brand      sp      mrp      is_express      saving_msg      link      img_url      qty      wgt      p_desc    }    total_sp    total_mrp    annotation_msg  }  gift {    msg  }  sale {    type    display_message    end_time    maximum_redem_per_order    maximum_redem_per_member    show_counter    message    offers_msg  }  promo {    type    label    id    name    saving    savings_display    desc    url    desc_label  }  store_availability {    tab_type    pstat    availability_info_id    store_id  }  discounted_price {    display_name    value  }}\n    ","variables":{"id":"' + product_id + '","visitorId":"824190617","masterRi":"3630","cityId":"1"}}'
+
+  products_ids.each do |product|
+
+    body = '{"query":"query ProductQuery(  $id: Int!) {  product(    id: $id  ) {    base_img_url                      ...productFields    children {      ...productFields    }  }}fragment productFields on Product {  id  desc  pack_desc  sp  mrp  w  images {    s    m    l    xl    xxl  }  variable_weight {    msg    link  }  discount {    type    value  }  brand {    name    slug    url  }  additional_attr {    food_type    info {      type      image      sub_type      label    }  }  tabs {    content    title  }  tags {    header    values {      display_name      dest_type      dest_slug      url    }  }  combo_info {    destination {      display_name      dest_type      dest_slug      url    }    total_saving_msg              items{      id      brand      sp      mrp      is_express      saving_msg      link      img_url      qty      wgt      p_desc    }    total_sp    total_mrp    annotation_msg  }  gift {    msg  }  sale {    type    display_message    end_time    maximum_redem_per_order    maximum_redem_per_member    show_counter    message    offers_msg  }  promo {    type    label    id    name    saving    savings_display    desc    url    desc_label  }  store_availability {    tab_type    pstat    availability_info_id    store_id  }  discounted_price {    display_name    value  }}\n    ","variables":{"id":"' + product["product_id"] + '","visitorId":"824190617","masterRi":"3630","cityId":"1"}}'
 
 
     pages << {
         page_type: 'product_details',
         method: 'POST',
         headers:headers,
-        url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{page}&rank=#{ rank}",
+        url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{product["product_page"]}&rank=#{ product["product_rank"]}",
         body: body,
         vars: {
             'input_type' => page['vars']['input_type'],
@@ -95,13 +101,13 @@ if current_page * 20 > scrape_url_nbr_products
             'SCRAPE_URL_NBR_PRODUCTS' => products_ids.length,
             'rank' => rank,
             'SCRAPE_URL_NBR_PRODUCTS_PG1' => nbr_products_pg1,
-            'page' => page
+            'page' => current_page
         }
     }
     rank=rank+1
     if rank>20
       rank=1
-      page = page+1
+      current_page = current_page+1
     end
 
 
