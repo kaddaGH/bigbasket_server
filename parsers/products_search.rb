@@ -49,6 +49,10 @@ else
 end
 
 
+products.each_with_index do |product|
+  products_ids<<product['sku'].to_s
+end
+
 
 headers = {
 
@@ -71,7 +75,7 @@ headers = {
 }
 
 
-if current_page * products.length > scrape_url_nbr_products
+if current_page * 20 > scrape_url_nbr_products
   rank = 1
   products_ids.each_with_index do |product_id|
 
@@ -82,7 +86,7 @@ if current_page * products.length > scrape_url_nbr_products
         page_type: 'product_details',
         method: 'POST',
         headers:headers,
-        url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{current_page + 1}&rank=#{ i + 1}",
+        url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{current_page + 1}&rank=#{ rank}",
         body: body,
         vars: {
             'input_type' => page['vars']['input_type'],
@@ -101,10 +105,11 @@ if current_page * products.length > scrape_url_nbr_products
 
   end
 
-else
 
 
-  products_ids<<product['sku'].to_s
+
+
+
 end
 
 
