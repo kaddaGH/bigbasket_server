@@ -28,32 +28,6 @@ else
   nbr_products_pg1 = page['vars']['nbr_products_pg1']
 end
 
-# if ot's first page , generate pagination
-if scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products > 19
-
-  url =   "https://www.bigbasket.com/product/get-products/?slug=#{slug}&tab_type=[%22all%22]&sorted_on=relevance&listtype=ps"
-  #url = "https://www.bigbasket.com/product/get-products/?sid=#{session_id}&listtype=ps&filters=[]&sorted_on=popularity&slug=#{slug}&tab_type=[%22all%22]"
-
-  pages << {
-      page_type: 'products_search',
-      method: 'GET',
-      url: url + "&page=#{current_page + 1}",
-      vars: {
-          'input_type' => page['vars']['input_type'],
-          'search_term' => page['vars']['search_term'],
-          'page' => current_page + 1,
-          'nbr_products_pg1' => nbr_products_pg1,
-          'scrape_url_nbr_products' => scrape_url_nbr_products,
-          'products_ids' => products_ids,
-          "slug" => slug,
-          "session_id" => session_id
-
-      }
-  }
-
-
-end
-
 
 products.each_with_index do |product, i|
   products_ids << {
@@ -66,6 +40,8 @@ products.each_with_index do |product, i|
 
 
 end
+
+
 
 
 headers = {
@@ -89,32 +65,64 @@ headers = {
 }
 
 
-if current_page * 20 > scrape_url_nbr_products
+
+# if there is next page
+if scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products > 19 and products.length > 19
+
+  url =   "https://www.bigbasket.com/product/get-products/?slug=#{slug}&tab_type=[%22all%22]&sorted_on=relevance&listtype=ps"
+
+  pages << {
+      page_type: 'products_search',
+      method: 'GET',
+      url: url + "&page=#{current_page + 1}",
+      vars: {
+          'input_type' => page['vars']['input_type'],
+          'search_term' => page['vars']['search_term'],
+          'page' => current_page + 1,
+          'nbr_products_pg1' => nbr_products_pg1,
+          'scrape_url_nbr_products' => scrape_url_nbr_products,
+          'products_ids' => products_ids,
+          "slug" => slug,
+          "session_id" => session_id
+
+      }
+  }
+
+# if it's last page
+else
 
 
-  products_ids.each do |product|
+    products_ids.each do |product|
 
-    body = '{"query":"query ProductQuery(  $id: Int!) {  product(    id: $id  ) {    base_img_url                      ...productFields    children {      ...productFields    }  }}fragment productFields on Product {  id  desc  pack_desc  sp  mrp  w  images {    s    m    l    xl    xxl  }  variable_weight {    msg    link  }  discount {    type    value  }  brand {    name    slug    url  }  additional_attr {    food_type    info {      type      image      sub_type      label    }  }  tabs {    content    title  }  tags {    header    values {      display_name      dest_type      dest_slug      url    }  }  combo_info {    destination {      display_name      dest_type      dest_slug      url    }    total_saving_msg              items{      id      brand      sp      mrp      is_express      saving_msg      link      img_url      qty      wgt      p_desc    }    total_sp    total_mrp    annotation_msg  }  gift {    msg  }  sale {    type    display_message    end_time    maximum_redem_per_order    maximum_redem_per_member    show_counter    message    offers_msg  }  promo {    type    label    id    name    saving    savings_display    desc    url    desc_label  }  store_availability {    tab_type    pstat    availability_info_id    store_id  }  discounted_price {    display_name    value  }}\n    ","variables":{"id":"' + product["product_id"] + '","visitorId":"824190617","masterRi":"3630","cityId":"1"}}'
+      body = '{"query":"query ProductQuery(  $id: Int!) {  product(    id: $id  ) {    base_img_url                      ...productFields    children {      ...productFields    }  }}fragment productFields on Product {  id  desc  pack_desc  sp  mrp  w  images {    s    m    l    xl    xxl  }  variable_weight {    msg    link  }  discount {    type    value  }  brand {    name    slug    url  }  additional_attr {    food_type    info {      type      image      sub_type      label    }  }  tabs {    content    title  }  tags {    header    values {      display_name      dest_type      dest_slug      url    }  }  combo_info {    destination {      display_name      dest_type      dest_slug      url    }    total_saving_msg              items{      id      brand      sp      mrp      is_express      saving_msg      link      img_url      qty      wgt      p_desc    }    total_sp    total_mrp    annotation_msg  }  gift {    msg  }  sale {    type    display_message    end_time    maximum_redem_per_order    maximum_redem_per_member    show_counter    message    offers_msg  }  promo {    type    label    id    name    saving    savings_display    desc    url    desc_label  }  store_availability {    tab_type    pstat    availability_info_id    store_id  }  discounted_price {    display_name    value  }}\n    ","variables":{"id":"' + product["product_id"] + '","visitorId":"824190617","masterRi":"3630","cityId":"1"}}'
 
 
-    pages << {
-        page_type: 'product_details',
-        method: 'POST',
-        headers: headers,
-        url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{product["product_page"]}&rank=#{ product["product_rank"]}",
-        body: body,
-        vars: {
-            'input_type' => page['vars']['input_type'],
-            'search_term' => page['vars']['search_term'],
-            'SCRAPE_URL_NBR_PRODUCTS' => products_ids.length,
-            'rank' => product["product_rank"],
-            'SCRAPE_URL_NBR_PRODUCTS_PG1' => nbr_products_pg1,
-            'page' => product["product_page"]
-        }
-    }
+      pages << {
+          page_type: 'product_details',
+          method: 'POST',
+          headers: headers,
+          url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{product["product_page"]}&rank=#{ product["product_rank"]}",
+          body: body,
+          vars: {
+              'input_type' => page['vars']['input_type'],
+              'search_term' => page['vars']['search_term'],
+              'SCRAPE_URL_NBR_PRODUCTS' => products_ids.length,
+              'rank' => product["product_rank"],
+              'SCRAPE_URL_NBR_PRODUCTS_PG1' => nbr_products_pg1,
+              'page' => product["product_page"]
+          }
+      }
+
+
+
 
 
   end
+
+
+
+
+
 
 
 end
