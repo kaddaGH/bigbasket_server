@@ -16,7 +16,20 @@ headers ={
 }
 
 
-search_terms = ['Energy Drinks']
+pages << {
+    page_type: 'products_search',
+    headers:headers,
+    method: 'GET',
+    url: 'https://www.bigbasket.com/custompage/sysgenpd/?type=pc&slug=sports-energy-drinks&sid=fyoAAIuhYwGibmbDomNjrTM1MXwxNjk0fDE3MDmoc2t1X2xpc3SQomFvwqJ1csKiYXDDomx0zQEToW-qcG9wdWxhcml0ealzb3VyY2VfaWQBo21yaQE=',
+    vars: {
+        'input_type' => 'taxonomy',
+        'search_term' => '-',
+        'page' => 1
+    }
+
+
+}
+search_terms = ['Red Bull', 'RedBull', 'Energy Drink', 'Energy Drinks']
 search_terms.each do |search_term|
 
   pages << {
