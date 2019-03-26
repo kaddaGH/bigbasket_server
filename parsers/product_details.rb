@@ -16,7 +16,10 @@ description = ''
 
 product['tabs'].each do |tab|
 
-  description=description+' '+tab['content']
+  if ['About','Other Product Info'].include?tab['title']
+    description=description+' '+tab['content']
+  end
+
 
 end
 
@@ -42,6 +45,7 @@ size_info = title
     /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
     /(\d*[\.,]?\d+)\s?([Ll])/,
     /(\d*[\.,]?\d+)\s*?([Kk][Gg])/,
+    /(\d*[\.,]?\d+)\s*?([Gg][Mm])/,
     /(\d*[\.,]?\d+)\s?([Gg])/,
     /(\d*[\.,]?\d+)\s?([Ll]itre)/,
     /(\d*[\.,]?\d+)\s?([Ss]ervings)/,
@@ -50,7 +54,7 @@ size_info = title
     /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
     /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
     /(\d*[\.,]?\d+)\s?([Ii]nch)/,
-    /(\d*[\.,]?\d+)\s*?([Gg][Mm])/,
+
     /(\d*[\.,]?\d+)\s?([Cc]hews)/
 
 
