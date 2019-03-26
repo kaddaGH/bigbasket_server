@@ -55,7 +55,7 @@ headers = {
     'Content-Type' => 'application/json',
     'Origin' => 'https://www.bigbasket.com',
     'Content-Length' => '2374',
-    'Cookie' => '_bb_locSrc=default; _bb_cid=1; ts="2019-03-21 16:03:44.725"; _bb_aid="MzE2OTE4OTIzMg=="; _bb_vid="MjMyOTk0Njc0Mw=="; _bb_tc=0; _client_version=2145; _bb_rdt="MzE1MjE4MDQyMg==.0"; _bb_rd=6; sessionid=ty7ji0z25o232d27x09eqodmafhe31fi; bigbasket.com=b79397f6-d43a-42b3-ada0-eebf3215c4d6; _ga=GA1.2.378761513.1551956329; csrftoken=mPnduUJ5DMss8pydbizQKdLnCcas4PntGS2PNaDLhz75RhXT6pgbRobaP9FkkDNc; _gcl_au=1.1.141212324.1551972744; _vz=viz_5c813989e422f; _fbp=fb.1.1551972758522.1358811859; cto_lwid=80d974a1-6bce-4da9-a341-ed43c06f2c8a; cto_idcpy=515f857f-ea3a-447c-b666-c4c9e5f4ffcd; _gid=GA1.2.1832922611.1553163987; Nprd=2|1553250475070; _gat=1; criteo_write_test=ChUIBBINbXlHb29nbGVSdGJJZBgBIAE',
+    'Cookie' => '_bb_vid="MjMzNDI0MjY3NA=="; _bb_tc=0; _bb_rdt="MzE1MjUyMjgxNg==.0"; _bb_rd=6; _ga=GA1.2.1478183119.1551443169; _gcl_au=1.1.1343835051.1551443170; _fbp=fb.1.1551443171848.1216155053; cto_lwid=7bf7c1f5-07a6-4200-837d-4ca1a644d076; _vz=viz_5c79250c7a4c8; sessionid=hof2i09hx7usjwqblnk55eovtc5fjmke; _client_version=2146; _bb_cid=1; _bb_visaddr="fFZhc2FudGggTmFnYXJ8NzcuNTkyMDI5NXwxMi45OTEwODY5fDU2MDA1Mnw="; _bb_aid="MzAxNzU1NjE5Nw=="; csrftoken=FIwwzrSUiuu10P3ocWGkOh0Oyx1ubHEM4yRlSVxy95BtVYrmsRulR5DJdppEcgVM; _gid=GA1.2.67568501.1553610537; Nprd=3|1553696971348; bigbasket.com=05e7186c-9ece-40b5-a6ee-7a4d6caeb989; ts="2019-03-26 22:37:57.114"',
 
     'DNT' => '1',
     'Connection' => 'keep-alive',
