@@ -101,7 +101,7 @@ else
           page_type: 'product_details',
           method: 'POST',
           headers: headers,
-          url: "https://www.bigbasket.com/product/pd/v2/gql?search_term=#{page['vars']['search_term']}&page=#{product["product_page"]}&rank=#{ product["product_rank"]}",
+          url: "https://www.bigbasket.com/product/pd/v1/gql?search_term=#{page['vars']['search_term']}&page=#{product["product_page"]}&rank=#{ product["product_rank"]}",
           body: body,
           vars: {
               'input_type' => page['vars']['input_type'],
