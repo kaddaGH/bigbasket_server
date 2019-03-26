@@ -16,7 +16,7 @@ description = ''
 
 product['tabs'].each do |tab|
 
-  if ['About','Other Product Info'].include?tab['title']
+  if tab['title'].include?'About' or tab['title'].include?'Product Info'
     description=description+' '+tab['content']
   end
 
