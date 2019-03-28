@@ -69,7 +69,8 @@ match = [
     /Case of (\d+)/,
     /(\d+)\s?[Cc]ount/,
     /(\d+)\s?[Cc][Tt]/,
-    /(\d+)[\s-]?[Pp]ack($|[^e])/,
+    /(\d+)\s?[Cc][Tt]/,
+    /(\d+)[\s-]?[Pp]cs/,
     /(\d+)\s?[Pp][Kk]/
 ].find {|regexp| size_info =~ regexp}
 in_pack = match ? $1 : '1'
