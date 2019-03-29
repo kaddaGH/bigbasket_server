@@ -7,7 +7,7 @@ product=data['data']['product']
 
 title = product['brand']['name']+' '+product['desc']+', '+product['w']+' '+product['pack_desc']
 
-availability=(product['store_availability'][0]['store_id'].nil?) ? "":"1" rescue "1"
+availability=(product['store_availability'][0]['pstat']=="O") ? "":"1" rescue "1"
 
 
 
