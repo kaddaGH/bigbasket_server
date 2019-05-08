@@ -20,7 +20,7 @@ pages << {
     page_type: 'products_search',
     headers:headers,
     method: 'GET',
-    url: 'https://www.bigbasket.com/custompage/sysgenpd/?type=pc&slug=sports-energy-drinks&sid=fyoAAIuhYwGibmbDomNjrTM1MXwxNjk0fDE3MDmoc2t1X2xpc3SQomFvwqJ1csKiYXDDomx0zQEToW-qcG9wdWxhcml0ealzb3VyY2VfaWQBo21yaQE=',
+    url: 'https://www.bigbasket.com/product/get-products/?sid=m124sI6ibmbDoWMBo21hdqUzLjIuMKJjY60zNTF8MTY5NHwxNzA5qHNrdV9saXN0kKJhb8KidXLComFww6JsdM0BG6Nkc2pNoW-qcG9wdWxhcml0eaVzcl9pZAGiZHPNAS-jbXJpzQ4u&listtype=pc&filters=[]&sorted_on=popularity&slug=sports-energy-drinks&tab_type=[%22all%22]',
     vars: {
         'input_type' => 'taxonomy',
         'search_term' => '-',
@@ -31,7 +31,6 @@ pages << {
 }
 search_terms = ['Red Bull', 'Energy Drink', 'Energy Drinks']
 search_terms.each do |search_term|
-break
   pages << {
       page_type: 'products_search',
       method: 'GET',
