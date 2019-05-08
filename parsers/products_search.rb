@@ -9,7 +9,10 @@ current_page = page['vars']['page']
 if current_page == 1
   scrape_url_nbr_products = data['tab_info'][0]['product_info']['p_count'].to_i
   products = data['tab_info'][0]['product_info']['products']
-  slug = CGI.escape(data['tab_info'][0]['q']) rescue ''
+  slug = CGI.escape(data['tab_info'][0]['q']) rescue nil
+  if slug.nil?
+    slug = CGI.escape(data['tab_info'][0]['header_section']['items'].last['slug']) rescue ""
+  end
   session_id = data['tab_info'][0]['sid']
   products_ids = []
 else
