@@ -31,7 +31,7 @@ end
 index = 1
 products.each_with_index do |product|
 
-  if product['all_prods'].lenght>0
+  if product['all_prods'].length>0
     product['all_prods'].each do |all_product|
       products_ids << {
 
@@ -52,7 +52,7 @@ products.each_with_index do |product|
 
       "product_id" => product['sku'].to_s,
       "product_page" => current_page,
-      "product_rank" => i + 1
+      "product_rank" => index
 
   }
   index=index+1
