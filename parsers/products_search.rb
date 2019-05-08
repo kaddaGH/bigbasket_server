@@ -47,7 +47,7 @@ products.each_with_index do |product|
 
 
 
-  end
+ else
   products_ids << {
 
       "product_id" => product['sku'].to_s,
@@ -56,7 +56,7 @@ products.each_with_index do |product|
 
   }
   index=index+1
-
+  end
 
 end
 
