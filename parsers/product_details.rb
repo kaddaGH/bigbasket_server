@@ -21,10 +21,11 @@ product['tabs'].each do |tab|
   end
 
 
+  
 end
 
 description=description.gsub(/[^<>]+<\/style>/,'').gsub(/<[^<>]+>/,' ').gsub(/[\s\n,]+/,' ').strip
-
+description = description.gsub('&bull;','•')
 ean = description[/(?<=EAN Code: )(\d+)/]
 promotion = product['combo_info']['total_saving_msg']
 
