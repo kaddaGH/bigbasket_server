@@ -23,13 +23,6 @@ else
   session_id = page['vars']['session_id']
 end
 
-if current_page == 1 and scrape_url_nbr_products > products.length and scrape_url_nbr_products > 19
-  nbr_products_pg1 = products.length
-elsif current_page == 1 and products.length <= scrape_url_nbr_products
-  nbr_products_pg1 = products.length
-else
-  nbr_products_pg1 = page['vars']['nbr_products_pg1']
-end
 
 index = 1
 products.each_with_index do |product|
@@ -64,7 +57,13 @@ products.each_with_index do |product|
 end
 
 
-
+if current_page == 1 and scrape_url_nbr_products >  products_ids.length and scrape_url_nbr_products > 19
+  nbr_products_pg1 =  products_ids.length
+elsif current_page == 1 and  products_ids.length <= scrape_url_nbr_products
+  nbr_products_pg1 =  products_ids.length
+else
+  nbr_products_pg1 = page['vars']['nbr_products_pg1']
+end
 
 headers = {
 
@@ -113,9 +112,8 @@ if scrape_url_nbr_products > products_ids.length and scrape_url_nbr_products > 1
 # if it's last page
 else
 
-
     products_ids.each do |product|
-     break
+
       body = '{"query":"query ProductQuery(  $id: Int!) {  product(    id: $id  ) {    base_img_url                      ...productFields    children {      ...productFields    }  }}fragment productFields on Product {  id  desc  pack_desc  sp  mrp  w  images {    s    m    l    xl    xxl  }  variable_weight {    msg    link  }  discount {    type    value  }  brand {    name    slug    url  }  additional_attr {    food_type    info {      type      image      sub_type      label    }  }  tabs {    content    title  }  tags {    header    values {      display_name      dest_type      dest_slug      url    }  }  combo_info {    destination {      display_name      dest_type      dest_slug      url    }    total_saving_msg              items{      id      brand      sp      mrp      is_express      saving_msg      link      img_url      qty      wgt      p_desc    }    total_sp    total_mrp    annotation_msg  }  gift {    msg  }  sale {    type    display_message    end_time    maximum_redem_per_order    maximum_redem_per_member    show_counter    message    offers_msg  }  promo {    type    label    id    name    saving    savings_display    desc    url    desc_label  }  store_availability {    tab_type    pstat    availability_info_id    store_id  }  discounted_price {    display_name    value  }}\n    ","variables":{"id":"' + product["product_id"] + '","visitorId":"820099996","masterRi":"1","cityId":"1"}}'
 
 
