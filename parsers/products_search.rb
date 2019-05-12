@@ -76,7 +76,7 @@ headers = {
     'Content-Type' => 'application/json',
     'Origin' => 'https://www.bigbasket.com',
     'Content-Length' => '2374',
-    'Cookie' => '_bb_vid="MjMzNDI0MjY3NA=="; _bb_tc=0; _bb_rdt="MzE1MjUyMjgxNg==.0"; _bb_rd=6; _ga=GA1.2.1478183119.1551443169; _gcl_au=1.1.1343835051.1551443170; _fbp=fb.1.1551443171848.1216155053; cto_lwid=7bf7c1f5-07a6-4200-837d-4ca1a644d076; _vz=viz_5c79250c7a4c8; sessionid=hof2i09hx7usjwqblnk55eovtc5fjmke; _client_version=2146; _bb_cid=1; _bb_visaddr="fFZhc2FudGggTmFnYXJ8NzcuNTkyMDI5NXwxMi45OTEwODY5fDU2MDA1Mnw="; _bb_aid="MzAxNzU1NjE5Nw=="; csrftoken=FIwwzrSUiuu10P3ocWGkOh0Oyx1ubHEM4yRlSVxy95BtVYrmsRulR5DJdppEcgVM; _gid=GA1.2.67568501.1553610537; Nprd=3|1553696971348; bigbasket.com=05e7186c-9ece-40b5-a6ee-7a4d6caeb989; ts="2019-03-26 22:37:57.114"',
+    'Cookie' => '_bb_cid=1; _bb_vid="MjM4MzE3NTU2MA=="; _bb_tc=0; _bb_rdt="MzE1MjgwNDUyOQ==.0"; _bb_rd=6; sessionid=hd7i1lbaqntxcdyjsb225w8spsmpmyu9; _ga=GA1.2.1253197919.1557284407; _gcl_au=1.1.1861207601.1557284412; _fbp=fb.1.1557284416495.450514309; _bb_source=pwa; _client_version=2161; _vz=viz_5cd2b8211e2e1; _gid=GA1.2.230885793.1557677793; _bb_visaddr="fFZhc2FudGggTmFnYXJ8NzcuNTkyMDI5NXwxMi45OTEwODY5fDU2MDA1Mnw="; _bb_aid="MzAxNzU1NjE5Nw=="; csrftoken=a4bIg4LAC7b6yfBuVxwSOWpHdq5k2qZjEkUiUZy0RJ4RjZOo5RvIHWpAaREImPJL; _gat=1; bigbasket.com=3f6f2ea5-edbb-41b7-9780-cb89bc1f3b45; ts="2019-05-12 22:09:08.105"',
 
     'DNT' => '1',
     'Connection' => 'keep-alive',
